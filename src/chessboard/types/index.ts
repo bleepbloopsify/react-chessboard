@@ -1,5 +1,5 @@
 import type { FC, ReactElement, ReactNode, Ref, RefObject } from "react";
-import { BackendFactory } from "dnd-core";
+import { BackendFactory, DragDropManager } from "dnd-core";
 
 export type Square =
   | "a8"
@@ -208,6 +208,10 @@ export type ChessboardProps = {
    * Custom react-dnd backend to use instead of the one provided by react-chessboard.
    */
   customDndBackend?: BackendFactory;
+  /**
+   * Custom react-dnd dragDropManager to use instead of the one provided by react-chessboard
+   */
+  customDndManager?: DragDropManager;
   /**
    * Options to use for the given custom react-dnd backend. See customDndBackend.
    */

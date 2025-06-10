@@ -1,11 +1,11 @@
 import { forwardRef, useEffect, useMemo, useRef, useState } from "react";
 
 import { Board } from "./components/Board";
-import { ChessboardDnDRoot } from "./components/DnDRoot";
-import { ChessboardProps } from "./types";
-import { ChessboardProvider } from "./context/chessboard-context";
 import { CustomDragLayer } from "./components/CustomDragLayer";
+import { ChessboardDnDRoot } from "./components/DnDRoot";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { ChessboardProvider } from "./context/chessboard-context";
+import { ChessboardProps } from "./types";
 // spare pieces component
 // semantic release with github actions
 // improved arrows
@@ -22,13 +22,14 @@ export type ClearPremoves = {
   clearPremoves: (clearLastPieceColour?: boolean) => void;
 };
 
-export { SparePiece } from "./components/SparePiece";
 export { ChessboardDnDProvider } from "./components/DnDRoot";
+export { SparePiece } from "./components/SparePiece";
 
 export const Chessboard = forwardRef<ClearPremoves, ChessboardProps>(
   (props, ref) => {
     const {
       customDndBackend,
+      customDndManager,
       customDndBackendOptions,
       onBoardWidthChange,
       ...otherProps
@@ -85,6 +86,7 @@ export const Chessboard = forwardRef<ClearPremoves, ChessboardProps>(
           <div ref={boardRef} style={{ width: "100%" }} />
           <ChessboardDnDRoot
             customDndBackend={customDndBackend}
+            customDndManager={customDndManager}
             customDndBackendOptions={customDndBackendOptions}
           >
             {boardWidth && (

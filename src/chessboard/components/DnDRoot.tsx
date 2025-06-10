@@ -1,13 +1,13 @@
+import { BackendFactory, DragDropManager } from "dnd-core";
 import {
-  useState,
-  useEffect,
   createContext,
-  useContext,
-  ReactNode,
   FC,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
 } from "react";
 import { DndProvider } from "react-dnd";
-import { BackendFactory } from "dnd-core";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
 import { ChessboardDnDProviderProps } from "../types";
@@ -20,6 +20,7 @@ const EmptyProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
 type ChessboardDnDRootProps = {
   customDndBackend?: BackendFactory;
+  customDndManager?: DragDropManager;
   customDndBackendOptions: unknown;
   children: ReactNode;
 };
@@ -49,6 +50,7 @@ export const ChessboardDnDProvider: FC<ChessboardDnDProviderProps> = ({
 
 export const ChessboardDnDRoot: FC<ChessboardDnDRootProps> = ({
   customDndBackend,
+  customDndManager,
   customDndBackendOptions,
   children,
 }) => {
@@ -73,6 +75,7 @@ export const ChessboardDnDRoot: FC<ChessboardDnDRootProps> = ({
   return clientWindow ? (
     <DnDWrapper
       backend={customDndBackend || (isMobile ? TouchBackend : HTML5Backend)}
+      manager={customDndManager}
       context={clientWindow}
       options={customDndBackend ? customDndBackendOptions : undefined}
     >
